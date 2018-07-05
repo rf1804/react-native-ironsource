@@ -1,0 +1,51 @@
+
+{
+  "name": "react-native-ironsource",
+  "title": "React Native Ironsource",
+  "version": "1.0.0",
+  "description": "App Monetization and Ads Manegement through Iron Source",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "rm -rf android/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rf1804/react-native-ironsource.git",
+    "baseUrl": "https://github.com/rf1804/react-native-ironsource"
+  },
+  "homepage": "https://github.com/rf1804/react-native-ironsource#readme",
+  "bugs": {
+    "url": "https://github.com/rf1804/react-native-ironsource/issues"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "offerwall",
+    "ads",
+    "adwall",
+    "rewards",
+    "rewarded",
+    "ironsource",
+    "iron-source",
+    "iron source"
+  ],
+  "author": {
+    "name": "Mohamad Arif Raja",
+    "email": "rfraja2943@gmail.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.1"
+  },
+  "devDependencies": {
+
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.1"
+  }
+}
