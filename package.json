@@ -2,7 +2,7 @@
 {
   "name": "react-native-ironsource",
   "title": "React Native Ironsource",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "App Monetization and Ads Manegement through Iron Source",
   "main": "index.js",
   "scripts": {
