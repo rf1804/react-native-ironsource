@@ -36,11 +36,24 @@ repositories {
         // https://github.com/facebook/react-native/blob/1e8f3b11027fe0a7514b4fc97d0798d3c64bc895/local-cli/templates/HelloWorld/android/build.gradle#L21
         url "$projectDir/../node_modules/react-native/android"
     }
+    maven {
+        url  "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    }
+    maven {
+        url  "http://dl.bintray.com/ironsource-mobile/android-adapters"
+    }
+    maven {
+        url  "https://adcolony.bintray.com/AdColony"
+    }
+    maven {
+        url "https://raw.githubusercontent.com/HyprMXMobile/Android-SDKs/master"
+    }
     mavenCentral()
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.9.1@jar'
 }
 
 def configureReactNativePom(def pom) {
@@ -113,4 +126,3 @@ afterEvaluate { project ->
         }
     }
 }
-  

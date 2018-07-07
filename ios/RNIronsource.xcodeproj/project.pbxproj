@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		105264CC20F07BD7004AEBCB /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 105264CB20F07BD7004AEBCB /* VideoVC.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNIronsource.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIronsource.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		105264C920F07BD6004AEBCB /* VideoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoVC.xib; sourceTree = "<group>"; };
+		105264CA20F07BD7004AEBCB /* VideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoVC.h; sourceTree = "<group>"; };
+		105264CB20F07BD7004AEBCB /* VideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoVC.m; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libRNIronsource.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIronsource.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* RNIronsource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronsource.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNIronsource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronsource.m; sourceTree = "<group>"; };
@@ -50,6 +54,9 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				105264CA20F07BD7004AEBCB /* VideoVC.h */,
+				105264CB20F07BD7004AEBCB /* VideoVC.m */,
+				105264C920F07BD6004AEBCB /* VideoVC.xib */,
 				B3E7B5881CC2AC0600A0062D /* RNIronsource.h */,
 				B3E7B5891CC2AC0600A0062D /* RNIronsource.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -112,6 +119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				105264CC20F07BD7004AEBCB /* VideoVC.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNIronsource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,8 +223,13 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(SRCROOT)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -231,6 +244,11 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(SRCROOT)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

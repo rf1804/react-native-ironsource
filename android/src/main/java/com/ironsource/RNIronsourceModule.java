@@ -8,15 +8,22 @@ import com.facebook.react.bridge.Callback;
 
 public class RNIronsourceModule extends ReactContextBaseJavaModule {
 
-  private final ReactApplicationContext reactContext;
-
   public RNIronsourceModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.reactContext = reactContext;
   }
 
   @Override
   public String getName() {
     return "RNIronsource";
+  }
+
+  @ReactMethod
+  public void startIronSource(appkey, userid, adtype) {
+    ReactApplicationContext context = getReactApplicationContext();
+    Intent intent = new Intent(context, IronSourceActivity.class);
+    intent.putExtra("AppKey",appkey)
+    intent.putExtra("userId",userid)
+    intent.putExtra("AdsType",adtype)
+    context.startActivity(intent);
   }
 }

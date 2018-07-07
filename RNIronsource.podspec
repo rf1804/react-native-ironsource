@@ -9,18 +9,16 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   RNIronsource
                    DESC
-  s.homepage     = "https://github.com/author/RNIronsource"
+  s.homepage     = "https://github.com/rf1804/react-native-ironsource#readme"
   s.license      = "MIT"
-  # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author       = { "author" => "author@domain.cn" }
-  s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/author/RNIronsource.git", :tag => "#{s.version}" }
+  s.license    = { :type => "MIT", :file => "LICENSE" }
+  s.author       = { "author" => "rfraja2943@gmail.com" }
+  s.pl0atform     = :ios, "7.0"
+  s.source       = { :git => "#{package_json["repository"]["url"]}.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m}"
   s.requires_arc = true
 
   s.dependency "React"
-  #s.dependency "others"
+  s.dependency 'IronSourceSDK','6.7.9.3'
 end
-
-  

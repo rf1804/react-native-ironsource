@@ -6,8 +6,12 @@
   "description": "App Monetization and Ads Manegement through Iron Source",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "rm -rf android/build"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "rnpm": {
+     "ios": {
+        "sourceDir": "./ios"
+     }
   },
   "repository": {
     "type": "git",
@@ -39,12 +43,10 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-
     "react": "16.0.0-alpha.6",
     "react-native": "^0.44.1"
   },
   "devDependencies": {
-
     "react": "16.0.0-alpha.6",
     "react-native": "^0.44.1"
   }
