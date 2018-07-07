@@ -1,6 +1,5 @@
 
-# Coming Soon
-<!-- # react-native-ironsource
+# react-native-ironsource
 
 ## Getting started
 
@@ -40,7 +39,7 @@
 ```javascript
 import RNIronsource from 'react-native-ironsource';
 
-// TODO: What to do with the module?
-RNIronsource;
+appKey, userId, adType in String
+
+RNIronsource.startIronSource(appKey, userId, adType);
 ```
-   -->

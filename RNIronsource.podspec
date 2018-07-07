@@ -12,9 +12,10 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/rf1804/react-native-ironsource#readme"
   s.license      = "MIT"
   s.license    = { :type => "MIT", :file => "LICENSE" }
-  s.author       = { "author" => "rfraja2943@gmail.com" }
+  s.author       = { "Mohamad Arif Raja" => "rfraja2943@gmail.com" }
   s.pl0atform     = :ios, "7.0"
   s.source       = { :git => "#{package_json["repository"]["url"]}.git", :tag => "#{s.version}" }
+  s.compiler_flags = '–ObjC'
 
   s.source_files = "ios/**/*.{h,m}"
   s.requires_arc = true
