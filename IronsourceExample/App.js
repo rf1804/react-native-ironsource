@@ -21,7 +21,7 @@ export default class App extends Component<Props> {
     else {
       appKey = '7575f765'
     }
-    RNIronsource.startIronSource(appKey, '1', 'offerwall')
+    RNIronsource.startIronSource(appKey, '15', 'offerwall')
   }
   render() {
     return (

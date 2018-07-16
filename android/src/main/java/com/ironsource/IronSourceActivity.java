@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ironsource.adapters.supersonicads.SupersonicConfig;
@@ -23,6 +25,9 @@ import com.ironsource.mediationsdk.sdk.InterstitialListener;
 import com.ironsource.mediationsdk.sdk.OfferwallListener;
 import com.ironsource.mediationsdk.sdk.RewardedVideoListener;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class IronSourceActivity extends Activity implements RewardedVideoListener, OfferwallListener, InterstitialListener {
 
     private final String TAG = "IronSourceActivity";
@@ -36,12 +41,14 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
     private Placement mPlacement;
 
     private FrameLayout mBannerParentLayout;
+    private ProgressBar progressBar;
     private IronSourceBannerLayout mIronSourceBannerLayout;
     private final String  AppKey="AppKey";
     private final String userId="userId";
     private final String AdsType="AdsType";
+    private boolean  isFinished = false;
     private final String IS_REWARDED_VIDEO="IS_REWARDED_VIDEO";
-    private final String IS_OFFERWALL="IS_OFFERWALL";
+    private final String IS_OFFERWALL="offerwall";
     private final String IS_BANNER="IS_BANNER";
     private final String IS_INTERSTITIAL="IS_INTERSTITIAL";
 
@@ -61,7 +68,29 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
             //Network Connectivity Status
             IronSource.shouldTrackNetworkState(this, true);
 
-            if(getIntent().hasExtra(AdsType)){
+
+
+            (new Handler()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(getIntent().hasExtra(AdsType)){
+                        if(getIntent().getStringExtra(AdsType).equals(IS_REWARDED_VIDEO)){
+                            if (IronSource.isRewardedVideoAvailable())    //show rewarded video
+                                IronSource.showRewardedVideo();
+                        }else if(getIntent().getStringExtra(AdsType).equals(IS_OFFERWALL)){
+                            if (IronSource.isOfferwallAvailable()) //show the offerwall
+                                IronSource.showOfferwall();
+                        }else if(getIntent().getStringExtra(AdsType).equals(IS_INTERSTITIAL)){
+                            IronSource.loadInterstitial();
+                        }else if(getIntent().getStringExtra(AdsType).equals(IS_BANNER)){
+                            createAndloadBanner();
+                        }
+                    }else {
+                        Toast.makeText(IronSourceActivity.this,"Add type missing",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            },10000);
+            /*if(getIntent().hasExtra(AdsType)){
                 if(getIntent().getStringExtra(AdsType).equals(IS_REWARDED_VIDEO)){
                     if (IronSource.isRewardedVideoAvailable())    //show rewarded video
                         IronSource.showRewardedVideo();
@@ -75,7 +104,7 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
                 }
             }else {
                 Toast.makeText(this,"Add type missing",Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }else {
            Toast.makeText(this,"Something went wong",Toast.LENGTH_SHORT).show();
         }
@@ -206,6 +235,7 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
         versionTV.setText(getResources().getString(R.string.version) + " " + IronSourceUtils.getSDKVersion());*/
 
         mBannerParentLayout = (FrameLayout) findViewById(R.id.banner_footer);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
 
@@ -233,6 +263,7 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
                     Log.d(TAG, "onBannerAdLoaded");
                     // since banner container was "gone" by default, we need to make it visible as soon as the banner is ready
                     mBannerParentLayout.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -363,7 +394,7 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
    /* *//**
      * Set the Show Interstitial button state according to the product's state
      *
-     * @param available if the interstitial is available
+     * @param "available" if the interstitial is available
      */
  /*   public void handleInterstitialShowButtonState(final boolean available) {
         final int color;
@@ -447,12 +478,27 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
     @Override
     public void onOfferwallAvailable(boolean available) {
       //  handleOfferwallButtonState(available);
+        Log.d(TAG, "onOfferwallOpened");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
     public void onOfferwallOpened() {
         // called when the offerwall has opened
         Log.d(TAG, "onOfferwallOpened");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
@@ -467,6 +513,9 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
     @Override
     public boolean onOfferwallAdCredited(int credits, int totalCredits, boolean totalCreditsFlag) {
         Log.d(TAG, "onOfferwallAdCredited" + " credits:" + credits + " totalCredits:" + totalCredits + " totalCreditsFlag:" + totalCreditsFlag);
+        isFinished= true;
+        IronSource.shouldTrackNetworkState(IronSourceActivity.this,false);
+        finish();
         return false;
     }
 
@@ -482,6 +531,7 @@ public class IronSourceActivity extends Activity implements RewardedVideoListene
     public void onOfferwallClosed() {
         // called when the offerwall has closed
         Log.d(TAG, "onOfferwallClosed");
+        finish();
     }
 
     // --------- IronSource Interstitial Listener ---------

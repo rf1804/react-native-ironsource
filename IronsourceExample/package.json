@@ -12,9 +12,9 @@
     "react-native-ironsource": "https://github.com/rf1804/react-native-ironsource.git"
   },
   "devDependencies": {
-    "babel-jest": "23.2.0",
+    "babel-jest": "23.4.0",
     "babel-preset-react-native": "^5",
-    "jest": "23.3.0",
+    "jest": "23.4.0",
     "react-test-renderer": "16.4.1"
   },
   "jest": {

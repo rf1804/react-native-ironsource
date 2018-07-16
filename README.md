@@ -39,7 +39,14 @@
 ```javascript
 import RNIronsource from 'react-native-ironsource';
 
-appKey, userId, adType in String
 
 RNIronsource.startIronSource(appKey, userId, adType);
+
+appKey, userId, adType in String
+
+adType options:
+  Rewarded Video: "rewardedvideo",
+  Interstitial Ads: "interstitial",
+  Offerwall: "offerwall",
+  Banner: "banner"
 ```

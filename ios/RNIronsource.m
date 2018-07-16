@@ -25,6 +25,8 @@ RCT_EXPORT_METHOD(startIronSource:(NSString *)appkey userid:(NSString *)userid a
     video.userId = userid;
     video.AdsType = adtype;
     
-    [self presentViewController:video animated:true completion:nil];
+    UIViewController *root = [[[UIApplication sharedApplication] delegate] window].rootViewController;
+    
+    [root presentViewController:video animated:true completion:nil];
 }
 @end

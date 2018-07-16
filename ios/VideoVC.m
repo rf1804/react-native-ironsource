@@ -15,20 +15,29 @@
     if (_AdsType == NULL) {
         printf("Crash due to empty adtype");
     }
-    
-    [IronSource initWithAppKey:_AppKey adUnits:@[_AdsType]];
-    
-    if ([_AdsType isEqualToString:IS_OFFERWALL]) {
-        [IronSource setOfferwallDelegate:self];
-
+    if (![IronSource hasOfferwall]) {
+        
+        [IronSource initWithAppKey:_AppKey adUnits:@[_AdsType]];
+        
+        if ([_AdsType isEqualToString:IS_OFFERWALL]) {
+            [IronSource setOfferwallDelegate:self];
+        } else {
+            [IronSource setRewardedVideoDelegate:self];
+        }
+        [IronSource setUserId: _userId];
+        
     } else {
-        [IronSource setRewardedVideoDelegate:self];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [IronSource showOfferwallWithViewController:self];
+        });
     }
     
     
-    [IronSource setUserId: _userId];
-    [ISIntegrationHelper validateIntegration];
-    [IronSource shouldTrackReachability:YES];
+    
+    
+//    [ISIntegrationHelper validateIntegration];
+//    [IronSource shouldTrackReachability:YES];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -100,6 +109,8 @@
 -(void)offerwallDidShow {
     
 }
+
+
 //Called each time the Offerwall fails to show
 //@param error - will contain the failure code and description
 - (void)offerwallDidFailToShowWithError:(NSError *)error {
@@ -116,7 +127,6 @@
 //call (notified the user for example). if the return value is 'NO' the
 //'credits' value will be added to the next call.
 - (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo {
-    
     return true;
 }
 // Called when the method ‘-getOWCredits’
@@ -127,6 +137,12 @@
 }
 //Called when the user closes the Offerwall
 -(void)offerwallDidClose {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self dismissViewControllerAnimated: false completion:nil];
+
+    });
 }
 
 @end
