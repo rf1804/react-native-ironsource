@@ -5,16 +5,14 @@ package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 Pod::Spec.new do |s|
   s.name         = "RNIronsource"
   s.version      = package["version"]
-  s.summary      = package["description"]
-  s.description  = <<-DESC
-                  RNIronsource
-                   DESC
-  s.homepage     = "https://github.com/rf1804/react-native-ironsource#readme"
-  s.license      = "MIT"
-  s.license    = { :type => "MIT", :file => "LICENSE" }
-  s.author       = { "Mohamad Arif Raja" => "rfraja2943@gmail.com" }
-  s.pl0atform     = :ios, "7.0"
-  s.source       = { :git => "#{package_json["repository"]["url"]}.git", :tag => "#{s.version}" }
+  s.summary      = package["title"]
+  s.description  = package["description"]
+  s.homepage     = package["homepage"]
+  # s.license      = "MIT"
+  s.license    = { :type => package["license"], :file => package["licenseFilename"] }
+  s.author       = package["author"]
+  s.platform     = :ios, "11.0"
+  s.source       = { :git => package["repository"]["url"], :tag => "#{s.version}" }
   s.compiler_flags = '–ObjC'
 
   s.source_files = "ios/**/*.{h,m}"
